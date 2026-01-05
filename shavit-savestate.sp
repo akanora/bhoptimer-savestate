@@ -344,7 +344,7 @@ public void SaveGame(int client, int style)
 		int iSize = Shavit_GetClientFrameCount(client);
 
 		WriteReplayHeader(fFile, style, 0, g_aSavestates[client].aSnapshot.fCurrentTime, GetSteamAccountID(client), g_aSavestates[client].iPreFrames, 0, fZoneOffset, iSize, g_fTickrate, g_sCurrentMap);
-		WriteReplayFrames(ReplayFrames, iSize, fFile, null);
+		WriteReplayFrames(ReplayFrames, iSize, fFile);
 		delete fFile;
 		delete ReplayFrames;
 	}
