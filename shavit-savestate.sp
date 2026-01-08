@@ -557,6 +557,9 @@ public void LoadGame(int client, int style)
 		}
 	}
 
+	LoadEvents(client, style);
+	LoadCustomData(client, style);
+
 	char sQuery[2048];
 	FormatEx(sQuery, sizeof(sQuery), "SELECT `style`, `TbTimerEnabled`, `TfCurrentTime`, `TbClientPaused`, `TiJumps`, `TiStrafes`, `TiTotalMeasures`, `TiGoodGains`, `TfServerTime`, `TiKeyCombo`, `TiTimerTrack`, `TiMeasuredJumps`, `TiPerfectJumps`, `TfZoneOffset1`, `TfZoneOffset2`, `TfDistanceOffset1`, `TfDistanceOffset2`, `TfAvgVelocity`, `TfMaxVelocity`, `TfTimescale`, `TiZoneIncrement`, `TiFullTicks`, `TiFractionalTicks`, `TbPracticeMode`, `TbJumped`, `TbCanUseAllKeys`, `TbOnGround`, `TiLastButtons`, `TfLastAngle`, `TiLandingTick`, `TiLastMoveType`, `TfStrafeWarning`, `TfLastInputVel1`, `TfLastInputVel2`, `Tfplayer_speedmod`, `TfNextFrameTime`, `TiLastMoveTypeTAS`, `CfPosition1`, `CfPosition2`, `CfPosition3`, `CfAngles1`, `CfAngles2`, `CfAngles3`, `CfVelocity1`, `CfVelocity2`, `CfVelocity3`, `CiMovetype`, `CfGravity`, `CfSpeed`, `CfStamina`, `CbDucked`, `CbDucking`, `CfDuckTime`, `CfDuckSpeed`, `CiFlags`, `CsTargetname`, `CsClassname`, `CiPreFrames`, `CbSegmented`, `CiGroundEntity`, `CvecLadderNormal1`, `CvecLadderNormal2`, `CvecLadderNormal3`, `Cm_bHasWalkMovedSinceLastJump`, `Cm_ignoreLadderJumpTime`, `Cm_lastStandingPos1`, `Cm_lastStandingPos2`, `Cm_lastStandingPos3`, `Cm_ladderSuppressionTimer1`, `Cm_ladderSuppressionTimer2`, `Cm_lastLadderNormal1`, `Cm_lastLadderNormal2`, `Cm_lastLadderNormal3`, `Cm_lastLadderPos1`, `Cm_lastLadderPos2`, `Cm_lastLadderPos3`, `Cm_afButtonDisabled`, `Cm_afButtonForced` FROM `saves` WHERE `map` = '%s' AND `auth` = %i AND `style` = %i;", g_sCurrentMap, GetSteamAccountID(client), style);
 	SQL_TQuery(g_hSavesDB, SQL_LoadGame, sQuery, client);
@@ -584,8 +587,6 @@ public void SQL_LoadGame(Handle owner, Handle hndl, const char[] error, any clie
 		else
 		{
 			int iStyle;
-			LoadEvents(client, iStyle);
-			LoadCustomData(client, iStyle);
 			while(SQL_FetchRow(hndl))
 			{
 				iStyle = SQL_FetchInt(hndl, 0);
