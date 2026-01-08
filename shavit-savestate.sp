@@ -584,6 +584,8 @@ public void SQL_LoadGame(Handle owner, Handle hndl, const char[] error, any clie
 		else
 		{
 			int iStyle;
+			LoadEvents(client, iStyle);
+			LoadCustomData(client, iStyle);
 			while(SQL_FetchRow(hndl))
 			{
 				iStyle = SQL_FetchInt(hndl, 0);
@@ -672,8 +674,6 @@ public void SQL_LoadGame(Handle owner, Handle hndl, const char[] error, any clie
 			if(g_aReplayCache[client].aFrames)
 				Shavit_SetReplayData(client, g_aReplayCache[client].aFrames);
 			Shavit_SetPlayerPreFrames(client, g_aReplayCache[client].iPreFrames);
-			LoadEvents(client, iStyle);
-			LoadCustomData(client, iStyle);
 			Shavit_LoadCheckpointCache(client, g_aSavestates[client], -1, sizeof(g_aSavestates[client]), true);
 			if(Shavit_GetTimerStatus(client) == Timer_Paused)
 				Shavit_ResumeTimer(client);
