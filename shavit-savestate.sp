@@ -498,7 +498,7 @@ void OpenLoadGameMenu(int client)
 			IntToString(iStyle, sStyleID, sizeof(sStyleID));
 			FloatToString(g_fSaveTime[client][iStyle], sTime, sizeof(sTime));
 			FormatTime(sDate, sizeof(sDate), "%d %b %Y", g_iSaveDate[client][iStyle]);
-			FormatEx(sDisplay, sizeof(sDisplay), "%s\n    Time: %s (%s)\n ", g_sStyleStrings[iStyle].sStyleName, FormatToSeconds(sTime), sDate);
+			FormatEx(sDisplay, sizeof(sDisplay), "%s\n    %s (%s)\n ", g_sStyleStrings[iStyle].sStyleName, FormatToSeconds(sTime), sDate);
 			menu.AddItem(sStyleID, sDisplay);
 		}
 	}
@@ -827,7 +827,7 @@ void SQL_OpenViewSavesMenu(Handle owner, Handle hndl, const char[] error, int cl
 		FloatToString(fTime, sTime, sizeof(sTime));
 		FormatTime(sDate, sizeof(sDate), "%d %b %Y", iDate);
 
-		FormatEx(sDisplay, sizeof(sDisplay), "%s - %s\n    Time: %s (%s)\n ", sMap, g_sStyleStrings[iStyle].sStyleName, FormatToSeconds(sTime), sDate);
+		FormatEx(sDisplay, sizeof(sDisplay), "%s - %s\n    %s (%s)\n ", sMap, g_sStyleStrings[iStyle].sStyleName, FormatToSeconds(sTime), sDate);
 		menu.AddItem(sMap, sDisplay, StrEqual(g_sCurrentMap, sMap) ? ITEMDRAW_DISABLED : ITEMDRAW_DEFAULT);
 	}
 
